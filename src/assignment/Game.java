@@ -8,16 +8,19 @@ import java.util.*;
 import java.util.List;
 
 public class Game implements BoggleGame {
-    private BoggleDictionary dict;
+    private BoggleDictionary wordDictionary;
     private ArrayList<String> cubes;
     private char[][] gameBoard;
+    private long lastTilesSelected = 0;
+    private HashSet<String> foundWords;
+    private String lastWord;
 
     public Game() {
-        dict = new Dictionary();
+        wordDictionary = new Dictionary();
         cubes = new ArrayList<>();
-
+        foundWords = new HashSet<>();
         try {
-            newGame(4, 1, "cubes.txt", dict);
+            newGame(4, 1, "cubes.txt", wordDictionary);
         } catch (IOException ex) {
             System.err.println("The specified dictionary file cannot be accessed.");
             System.exit(1);
@@ -26,8 +29,12 @@ public class Game implements BoggleGame {
 
     @Override
     public void newGame(int size, int numPlayers, String cubeFile, BoggleDictionary dict) throws IOException {
+        lastWord = "";
+        wordDictionary = new Dictionary();
+        cubes = new ArrayList<>();
+        foundWords = new HashSet<>();
         loadCube(cubeFile);
-        dict.loadDictionary("words.txt");
+        wordDictionary.loadDictionary("words.txt");
         gameBoard = new char[size][size];
         generateDiceStates();
     }
@@ -40,17 +47,22 @@ public class Game implements BoggleGame {
     @Override
     public int addWord(String word, int player) {
         word = word.toUpperCase();
-        if (word.length() < 4 || word.length() > 16 || !word.matches("[A-Z]+"))
+        if (word.length() < 4 || word.length() > 16 || !word.matches("[A-Z]+") || !wordDictionary.contains(word) || foundWords.contains(word)) {
+            System.out.println("boom");
             return 0;
+        }
 
         for (int r = 0; r < gameBoard.length; r++) {
             boolean isValid = false;
             for (int c = 0; c < gameBoard[r].length; c++) {
                 if (gameBoard[r][c] == word.charAt(0)) {
+                    System.out.println(r + " " + c);
                     isValid = recursePossibilities(word, r, c);
                 }
             }
             if (isValid == true){
+                lastWord = word;
+                foundWords.add(lastWord);
                 return word.length() - 3;
             }
         }
@@ -112,19 +124,35 @@ public class Game implements BoggleGame {
     private boolean recursePossibilities(String word, int r, int c, long visited) {
         word = word.substring(1);
 
-        if (word.length() <= 0)
+        if (word.length() <= 0){
+            visited += (long) Math.pow(2, r * gameBoard.length + c);
+            lastTilesSelected = visited;
             return true;
-
+        }
         visited += (long) Math.pow(2, r * gameBoard.length + c);
         for (int i = Math.max(0, r - 1); i <= Math.min(gameBoard.length - 1, r + 1); i++) {
             for (int j = Math.max(0, c - 1); j <= Math.min(gameBoard[r].length - 1, c + 1); j++) {
-                if (gameBoard[i][j] == word.charAt(0) && (visited & ((long) Math.pow(2, i * gameBoard.length + j))) != 0) {
-                    if (recursePossibilities(word, i, j, visited))
+                if (gameBoard[i][j] == word.charAt(0) && (visited & ((long) Math.pow(2, i * gameBoard.length + j))) == 0) {
+                    System.out.println(i + " " + j);
+                    if (recursePossibilities(word, i, j, visited)) {
+                        System.out.println("last" + lastTilesSelected);
                         return true;
+                    }
                 }
             }
         }
         return false;
     }
 
+    public String getLastWord() {
+        return lastWord;
+    }
+
+    public long getLastTilesSelected() {
+        return lastTilesSelected;
+    }
+
+    public BoggleDictionary getWordDictionary() {
+        return wordDictionary;
+    }
 }

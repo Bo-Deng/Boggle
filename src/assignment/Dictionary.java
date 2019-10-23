@@ -17,7 +17,7 @@ public class Dictionary implements BoggleDictionary {
     public void loadDictionary(String filename) throws IOException {
         Scanner sc = new Scanner(new File(filename));
         while (sc.hasNext()) {
-            root.addWord(sc.next());
+            root.addWord(sc.next().toUpperCase());
         }
     }
 

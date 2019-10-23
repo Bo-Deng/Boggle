@@ -1,14 +1,17 @@
 package assignment;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Stack;
 
 public class TestMain {
     public static void main(String[] args) throws IOException {
         Dictionary dic = new Dictionary();
         dic.loadDictionary("test.txt");
-        System.out.println(dic.contains("lion"));
-        System.out.println(dic.contains("Jacobian"));
-        System.out.println(dic.isPrefix("lio"));
-        System.out.println(dic.isPrefix("Jacobi"));
+        Iterator it = dic.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+
     }
 }

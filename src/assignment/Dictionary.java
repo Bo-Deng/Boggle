@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class Dictionary implements BoggleDictionary {
 
-    private LetterNode root;
+    public LetterNode root;
 
     public Dictionary() {
         root = new LetterNode();
@@ -16,7 +16,6 @@ public class Dictionary implements BoggleDictionary {
     @Override
     public void loadDictionary(String filename) throws IOException {
         Scanner sc = new Scanner(new File(filename));
-
         while (sc.hasNext()) {
             root.addWord(sc.next());
         }
@@ -34,6 +33,6 @@ public class Dictionary implements BoggleDictionary {
 
     @Override
     public Iterator<String> iterator() {
-        return null;
+        return new BoggleDictionaryIterator(root);
     }
 }

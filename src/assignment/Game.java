@@ -1,25 +1,59 @@
 package assignment;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Collection;
+import java.util.*;
 import java.util.List;
 
 public class Game implements BoggleGame {
-    private char[][] board;
+    private BoggleDictionary dict;
+    private ArrayList<String> cubes;
+    private char[][] gameBoard;
+
+    public Game() {
+        dict = new Dictionary();
+        cubes = new ArrayList<>();
+
+        try {
+            newGame(4, 1, "cubes.txt", dict);
+        } catch (IOException ex) {
+            System.err.println("The specified dictionary file cannot be accessed.");
+            System.exit(1);
+        }
+    }
 
     @Override
     public void newGame(int size, int numPlayers, String cubeFile, BoggleDictionary dict) throws IOException {
-
+        loadCube(cubeFile);
+        dict.loadDictionary("words.txt");
+        gameBoard = new char[size][size];
+        generateDiceStates();
     }
 
     @Override
     public char[][] getBoard() {
-        return board;
+        return gameBoard;
     }
 
     @Override
     public int addWord(String word, int player) {
+        word = word.toUpperCase();
+        if (word.length() < 4 || word.length() > 16 || !word.matches("[A-Z]+"))
+            return 0;
+
+        for (int r = 0; r < gameBoard.length; r++) {
+            boolean isValid = false;
+            for (int c = 0; c < gameBoard[r].length; c++) {
+                if (gameBoard[r][c] == word.charAt(0)) {
+                    isValid = recursePossibilities(word, r, c);
+                }
+            }
+            if (isValid == true){
+                return word.length() - 3;
+            }
+        }
         return 0;
     }
 
@@ -47,4 +81,50 @@ public class Game implements BoggleGame {
     public int[] getScores() {
         return new int[0];
     }
+
+    private void loadCube(String cubesFile){
+        try {
+            Scanner cubeReader = new Scanner(new File(cubesFile));
+            while (cubeReader.hasNextLine()){
+                cubes.add(cubeReader.nextLine());
+            }
+        } catch (FileNotFoundException ex) {
+            System.err.println("Cubes File not Found");
+            System.exit(0);
+        }
+
+    }
+
+    private void generateDiceStates(){
+        Collections.shuffle(cubes);
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                int diceFace = (int) (Math.random() * 6);
+                gameBoard[i][j] = cubes.get(4 * i + j).charAt(diceFace);
+            }
+        }
+    }
+
+    private boolean recursePossibilities(String word, int r, int c) {
+        return recursePossibilities(word, r, c, 0);
+    }
+
+    private boolean recursePossibilities(String word, int r, int c, long visited) {
+        word = word.substring(1);
+
+        if (word.length() <= 0)
+            return true;
+
+        visited += (long) Math.pow(2, r * gameBoard.length + c);
+        for (int i = Math.max(0, r - 1); i <= Math.min(gameBoard.length - 1, r + 1); i++) {
+            for (int j = Math.max(0, c - 1); j <= Math.min(gameBoard[r].length - 1, c + 1); j++) {
+                if (gameBoard[i][j] == word.charAt(0) && (visited & ((long) Math.pow(2, i * gameBoard.length + j))) != 0) {
+                    if (recursePossibilities(word, i, j, visited))
+                        return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }

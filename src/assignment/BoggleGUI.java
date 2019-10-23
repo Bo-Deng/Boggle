@@ -1,11 +1,7 @@
 package assignment;
 
 import javax.swing.*;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,17 +18,19 @@ public class BoggleGUI extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    private ArrayList<String> cubes;
-    private JButton[][] gameBoard = new JButton[4][4];
+
+    private Game game;
+    private JButton[][] gameBoard;
+
 
     public BoggleGUI() {
-        cubes = new ArrayList();
+        game = new Game();
+        gameBoard = new JButton[game.getBoard().length][game.getBoard().length];
         initComponents();
         populateDiceArray();
-        loadCube("cubes.txt");
-        generateDiceStates();
+        setButtonText();
         ArrayList<JButton> high = new ArrayList<>();
-        high.add(gameBoard[1][1]);
+        high.add(gameBoard[3][2]);
         highlightButtons(high);
     }
 
@@ -50,9 +48,9 @@ public class BoggleGUI extends javax.swing.JFrame {
         R1C3 = new javax.swing.JButton();
         R1C4 = new javax.swing.JButton();
         R2C1 = new javax.swing.JButton();
-        R2C2 = new javax.swing.JButton();
-        R2C3 = new javax.swing.JButton();
         R2C4 = new javax.swing.JButton();
+        R2C3 = new javax.swing.JButton();
+        R2C2 = new javax.swing.JButton();
         R3C1 = new javax.swing.JButton();
         R3C2 = new javax.swing.JButton();
         R3C3 = new javax.swing.JButton();
@@ -95,10 +93,10 @@ public class BoggleGUI extends javax.swing.JFrame {
         R2C1.setMinimumSize(new java.awt.Dimension(80, 80));
         R2C1.setPreferredSize(new java.awt.Dimension(80, 80));
 
-        R2C2.setFont(new java.awt.Font("MV Boli", 0, 48)); // NOI18N
-        R2C2.setMaximumSize(new java.awt.Dimension(80, 80));
-        R2C2.setMinimumSize(new java.awt.Dimension(80, 80));
-        R2C2.setPreferredSize(new java.awt.Dimension(80, 80));
+        R2C4.setFont(new java.awt.Font("MV Boli", 0, 48)); // NOI18N
+        R2C4.setMaximumSize(new java.awt.Dimension(80, 80));
+        R2C4.setMinimumSize(new java.awt.Dimension(80, 80));
+        R2C4.setPreferredSize(new java.awt.Dimension(80, 80));
 
         R2C3.setFont(new java.awt.Font("MV Boli", 0, 48)); // NOI18N
         R2C3.setText("A");
@@ -106,11 +104,11 @@ public class BoggleGUI extends javax.swing.JFrame {
         R2C3.setMinimumSize(new java.awt.Dimension(80, 80));
         R2C3.setPreferredSize(new java.awt.Dimension(80, 80));
 
-        R2C4.setFont(new java.awt.Font("MV Boli", 0, 48)); // NOI18N
-        R2C4.setText("A");
-        R2C4.setMaximumSize(new java.awt.Dimension(80, 80));
-        R2C4.setMinimumSize(new java.awt.Dimension(80, 80));
-        R2C4.setPreferredSize(new java.awt.Dimension(80, 80));
+        R2C2.setFont(new java.awt.Font("MV Boli", 0, 48)); // NOI18N
+        R2C2.setText("A");
+        R2C2.setMaximumSize(new java.awt.Dimension(80, 80));
+        R2C2.setMinimumSize(new java.awt.Dimension(80, 80));
+        R2C2.setPreferredSize(new java.awt.Dimension(80, 80));
 
         R3C1.setFont(new java.awt.Font("MV Boli", 0, 48)); // NOI18N
         R3C1.setMaximumSize(new java.awt.Dimension(80, 80));
@@ -174,11 +172,11 @@ public class BoggleGUI extends javax.swing.JFrame {
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(R2C1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(R2C4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(R2C2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(R2C3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(R2C2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(R2C4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addComponent(R3C1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -211,8 +209,8 @@ public class BoggleGUI extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                 .addComponent(R2C1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(R2C4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addComponent(R2C2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(R2C2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(R2C4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(R2C3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,28 +268,15 @@ public class BoggleGUI extends javax.swing.JFrame {
         });
     }
 
-    private void loadCube(String cubesFile){
-        try {
-            Scanner cubeReader = new Scanner(new File(cubesFile));
-            while (cubeReader.hasNextLine()){
-                cubes.add(cubeReader.nextLine());
-            }
-        } catch (FileNotFoundException ex) {
-            System.err.println("Cubes File not Found");
-            System.exit(0);
-        }
-
-    }
-
     private void populateDiceArray(){
         gameBoard[0][0] = R1C1;
         gameBoard[0][1] = R1C2;
         gameBoard[0][2] = R1C3;
         gameBoard[0][3] = R1C4;
         gameBoard[1][0] = R2C1;
-        gameBoard[1][1] = R2C2;
-        gameBoard[1][2] = R2C3;
         gameBoard[1][3] = R2C4;
+        gameBoard[1][2] = R2C3;
+        gameBoard[1][1] = R2C2;
         gameBoard[2][0] = R3C1;
         gameBoard[2][1] = R3C2;
         gameBoard[2][2] = R3C3;
@@ -302,12 +287,10 @@ public class BoggleGUI extends javax.swing.JFrame {
         gameBoard[3][3] = R4C4;
     }
 
-    private void generateDiceStates(){
-        Collections.shuffle(cubes);
-        for (int i = 0; i < 4; i++){
-            for (int j = 0; j < 4; j++){
-                int diceFace = (int) (Math.random() * 6);
-                gameBoard[i][j].setText(cubes.get(4 * i + j).charAt(diceFace) + "");
+    private void setButtonText() {
+        for (int r = 0; r < gameBoard.length; r++) {
+            for (int c = 0; c < gameBoard[r].length; c++) {
+                gameBoard[r][c].setText(game.getBoard()[r][c] + "");
             }
         }
     }
@@ -325,10 +308,10 @@ public class BoggleGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify
     private javax.swing.JButton R2C1;
-    private javax.swing.JButton R2C2;
+    private javax.swing.JButton R2C4;
     private javax.swing.JButton R1C1;
     private javax.swing.JButton R2C3;
-    private javax.swing.JButton R2C4;
+    private javax.swing.JButton R2C2;
     private javax.swing.JButton R3C1;
     private javax.swing.JButton R3C2;
     private javax.swing.JButton R3C3;

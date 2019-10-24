@@ -48,6 +48,10 @@ public class Game implements BoggleGame {
         return gameBoard;
     }
 
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
     @Override
     public int addWord(String word, int player) {
         word = word.toUpperCase();

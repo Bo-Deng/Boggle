@@ -59,6 +59,8 @@ public class BoggleGUI extends javax.swing.JFrame {
         ScoreBoardScroll = new javax.swing.JScrollPane();
         ScoreBoard = new javax.swing.JLabel();
         EndTurn = new javax.swing.JButton();
+        P1Score = new javax.swing.JLabel();
+        CPUScore = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(520, 455));
@@ -184,6 +186,10 @@ public class BoggleGUI extends javax.swing.JFrame {
             }
         });
 
+        P1Score.setText("Player: 0");
+
+        CPUScore.setText("Comp: 0");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,15 +237,18 @@ public class BoggleGUI extends javax.swing.JFrame {
                                 .addGap(5, 5, 5)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(EndTurn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(ScoreBoardScroll))
+                                        .addComponent(ScoreBoardScroll)
+                                        .addComponent(P1Score, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(CPUScore)
+                                                .addGap(0, 0, Short.MAX_VALUE)))
                                 .addContainerGap())
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(ScoreBoardScroll)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addComponent(R1C3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,7 +276,13 @@ public class BoggleGUI extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                                         .addComponent(EnterWord, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(EnterButton))))
+                                                        .addComponent(EnterButton)))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(ScoreBoardScroll, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(P1Score)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(CPUScore)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(EndTurn, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                                 .addContainerGap())
@@ -287,8 +302,16 @@ public class BoggleGUI extends javax.swing.JFrame {
             highlightButtons(findTilesToHighlight(tiles));
             EnterWord.setText("");
             System.out.println(game.getLastWord());
-            scoreBoardText += ("<br/>" + game.getLastWord());
+            scoreBoardText += ("<br/>");
+            if (game.getCurrentPlayer() == 0){
+                scoreBoardText += "<font color='red'>" + game.getLastWord() + "</font>";
+            }
+            else if (game.getCurrentPlayer() == 1){
+                scoreBoardText += "<font color='blue'>" + game.getLastWord() + "</font>";
+            }
             ScoreBoard.setText("<html>" + scoreBoardText + "</html>");
+            P1Score.setText("<html><font color='red'> Player Score: " + game.getPlayerScores()[0] + "</font></html>");
+            CPUScore.setText("<html><font color='blue'>Comp Score: " + game.getPlayerScores()[1] + "</font></html>");
         }
     }
 
@@ -301,14 +324,23 @@ public class BoggleGUI extends javax.swing.JFrame {
                 highlightButtons(findTilesToHighlight(tiles));
                 EnterWord.setText("");
                 System.out.println(game.getLastWord());
-                scoreBoardText += ("<br/>" + game.getLastWord());
+                scoreBoardText += ("<br/>");
+                if (game.getCurrentPlayer() == 0){
+                    scoreBoardText += "<font color='red'>" + game.getLastWord() + "</font>";
+                }
+                else if (game.getCurrentPlayer() == 1){
+                    scoreBoardText += "<font color='blue'>" + game.getLastWord() + "</font>";
+                }
                 ScoreBoard.setText("<html>" + scoreBoardText + "</html>");
+                P1Score.setText("<html><font color='red'> Player Score: " + game.getPlayerScores()[0] + "</font></html>");
+                CPUScore.setText("<html><font color='blue'>Comp Score: " + game.getPlayerScores()[1] + "</font></html>");
             }
         }
     }
 
     private void EndTurnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+        game.setCurrentPlayer(1);
         Iterator it = game.getWordDictionary().iterator();
         while (it.hasNext()){
             int score = (game.addWord((String) it.next(), 0));
@@ -317,10 +349,18 @@ public class BoggleGUI extends javax.swing.JFrame {
                 highlightButtons(findTilesToHighlight(tiles));
                 EnterWord.setText("");
                 System.out.println(game.getLastWord());
-                scoreBoardText += ("<br/>" + game.getLastWord());
+                scoreBoardText += ("<br/>");
+                if (game.getCurrentPlayer() == 0){
+                    scoreBoardText += "<font color='red'>" + game.getLastWord() + "</font>";
+                }
+                else if (game.getCurrentPlayer() == 1){
+                    scoreBoardText += "<font color='blue'>" + game.getLastWord() + "</font>";
+                }
                 ScoreBoard.setText("<html>" + scoreBoardText + "</html>");
             }
         }
+        P1Score.setText("<html>Text color: <font color='red'> Player Score: " + game.getPlayerScores()[0] + "</font></html>");
+        CPUScore.setText("<html>Text color: <font color='blue'>Comp Score: " + game.getPlayerScores()[1] + "</font></html>");
     }
 
     private ArrayList<JButton> findTilesToHighlight(long tiles){
@@ -398,6 +438,8 @@ public class BoggleGUI extends javax.swing.JFrame {
                 gameBoard[r][c].setText(game.getBoard()[r][c] + "");
             }
         }
+        P1Score.setText("<html><font color='red'> Player Score: " + game.getPlayerScores()[0] + "</font></html>");
+        CPUScore.setText("<html><font color='blue'>Comp Score: " + game.getPlayerScores()[1] + "</font></html>");
     }
 
     private void highlightButtons(ArrayList<JButton> buttonsToHighlight){
@@ -412,8 +454,11 @@ public class BoggleGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify
+    private javax.swing.JLabel CPUScore;
+    private javax.swing.JButton EndTurn;
     private javax.swing.JButton EnterButton;
     private javax.swing.JTextField EnterWord;
+    private javax.swing.JLabel P1Score;
     private javax.swing.JButton R1C1;
     private javax.swing.JButton R1C2;
     private javax.swing.JButton R1C3;
@@ -430,7 +475,6 @@ public class BoggleGUI extends javax.swing.JFrame {
     private javax.swing.JButton R4C2;
     private javax.swing.JButton R4C3;
     private javax.swing.JButton R4C4;
-    private javax.swing.JButton EndTurn;
     private javax.swing.JLabel ScoreBoard;
     private javax.swing.JScrollPane ScoreBoardScroll;
     // End of variables declaration

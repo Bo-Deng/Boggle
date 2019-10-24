@@ -14,13 +14,15 @@ public class Game implements BoggleGame {
     private long lastTilesSelected = 0;
     private HashSet<String> foundWords;
     private String lastWord;
+    private int[] playerScores;
+    private int currentPlayer;
 
     public Game() {
         wordDictionary = new Dictionary();
         cubes = new ArrayList<>();
         foundWords = new HashSet<>();
         try {
-            newGame(4, 1, "cubes.txt", wordDictionary);
+            newGame(4, 2, "cubes.txt", wordDictionary);
         } catch (IOException ex) {
             System.err.println("The specified dictionary file cannot be accessed.");
             System.exit(1);
@@ -33,6 +35,8 @@ public class Game implements BoggleGame {
         wordDictionary = new Dictionary();
         cubes = new ArrayList<>();
         foundWords = new HashSet<>();
+        playerScores = new int[numPlayers];
+        currentPlayer = 0;
         loadCube(cubeFile);
         wordDictionary.loadDictionary("words.txt");
         gameBoard = new char[size][size];
@@ -63,7 +67,10 @@ public class Game implements BoggleGame {
             if (isValid == true){
                 lastWord = word;
                 foundWords.add(lastWord);
-                return word.length() - 3;
+
+                int wordScore = word.length() - 3;
+                playerScores[currentPlayer] += wordScore;
+                return wordScore;
             }
         }
         return 0;
@@ -76,7 +83,7 @@ public class Game implements BoggleGame {
 
     @Override
     public void setGame(char[][] board) {
-
+        gameBoard = board;
     }
 
     @Override
@@ -155,4 +162,8 @@ public class Game implements BoggleGame {
     public BoggleDictionary getWordDictionary() {
         return wordDictionary;
     }
+
+    public int getCurrentPlayer() { return currentPlayer; }
+
+    public int[] getPlayerScores() { return playerScores; }
 }

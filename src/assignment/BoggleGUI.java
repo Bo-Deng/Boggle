@@ -301,7 +301,6 @@ public class BoggleGUI extends javax.swing.JFrame {
             long tiles = game.getLastTilesSelected();
             highlightButtons(findTilesToHighlight(tiles));
             EnterWord.setText("");
-            System.out.println(game.getLastWord());
             scoreBoardText += ("<br/>");
             if (game.getCurrentPlayer() == 0){
                 scoreBoardText += "<font color='red'>" + game.getLastWord() + "</font>";
@@ -323,7 +322,6 @@ public class BoggleGUI extends javax.swing.JFrame {
                 long tiles = game.getLastTilesSelected();
                 highlightButtons(findTilesToHighlight(tiles));
                 EnterWord.setText("");
-                System.out.println(game.getLastWord());
                 scoreBoardText += ("<br/>");
                 if (game.getCurrentPlayer() == 0){
                     scoreBoardText += "<font color='red'>" + game.getLastWord() + "</font>";
@@ -341,24 +339,17 @@ public class BoggleGUI extends javax.swing.JFrame {
     private void EndTurnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         game.setCurrentPlayer(1);
-        Iterator it = game.getWordDictionary().iterator();
-        while (it.hasNext()){
-            int score = (game.addWord((String) it.next(), 0));
-            if (score != 0){
-                long tiles = game.getLastTilesSelected();
-                highlightButtons(findTilesToHighlight(tiles));
-                EnterWord.setText("");
-                System.out.println(game.getLastWord());
-                scoreBoardText += ("<br/>");
-                if (game.getCurrentPlayer() == 0){
-                    scoreBoardText += "<font color='red'>" + game.getLastWord() + "</font>";
-                }
-                else if (game.getCurrentPlayer() == 1){
-                    scoreBoardText += "<font color='blue'>" + game.getLastWord() + "</font>";
-                }
-                ScoreBoard.setText("<html>" + scoreBoardText + "</html>");
+        ArrayList<String> allWords = (ArrayList<String>) game.getAllWords();
+        for (String w : allWords){
+            scoreBoardText += ("<br/>");
+            if (game.getCurrentPlayer() == 0){
+                scoreBoardText += "<font color='red'>" + w + "</font>";
+            }
+            else if (game.getCurrentPlayer() == 1){
+                scoreBoardText += "<font color='blue'>" + w + "</font>";
             }
         }
+        ScoreBoard.setText("<html>" + scoreBoardText + "</html>");
         P1Score.setText("<html>Text color: <font color='red'> Player Score: " + game.getPlayerScores()[0] + "</font></html>");
         CPUScore.setText("<html>Text color: <font color='blue'>Comp Score: " + game.getPlayerScores()[1] + "</font></html>");
     }
@@ -370,7 +361,6 @@ public class BoggleGUI extends javax.swing.JFrame {
                 toHighlight.add(gameBoard[i / gameBoard.length][i % gameBoard.length]);
             }
         }
-        System.out.println("len" + toHighlight.size());
         return toHighlight;
     }
 

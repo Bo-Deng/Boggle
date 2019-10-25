@@ -12,10 +12,11 @@ public class Game implements BoggleGame {
     private ArrayList<String> cubes;
     private char[][] gameBoard;
     private long lastTilesSelected = 0;
-    private HashSet<String> foundWords;
+    public HashSet<String> foundWords;
     private String lastWord;
     private int[] playerScores;
     private int currentPlayer;
+    private SearchTactic searchTactic;
 
     public Game() {
         wordDictionary = new Dictionary();
@@ -37,6 +38,7 @@ public class Game implements BoggleGame {
         foundWords = new HashSet<>();
         playerScores = new int[numPlayers];
         currentPlayer = 0;
+        searchTactic = SearchTactic.SEARCH_BOARD;
         loadCube(cubeFile);
         wordDictionary.loadDictionary("words.txt");
         gameBoard = new char[size][size];
@@ -92,17 +94,64 @@ public class Game implements BoggleGame {
 
     @Override
     public Collection<String> getAllWords() {
-        return null;
+        if (searchTactic == SearchTactic.SEARCH_DICT) {
+            return dictionarySearch();
+        }
+        return boardSearch();
+    }
+
+    private Collection<String> dictionarySearch() {
+        ArrayList<String> allWords = new ArrayList<>();
+        Iterator it = wordDictionary.iterator();
+        while (it.hasNext()) {
+            String next = (String) it.next();
+            int score = addWord(next, currentPlayer);
+            if (score != 0) {
+                allWords.add(next);
+            }
+        }
+        return allWords;
+    }
+
+    private Collection<String> boardSearch() {
+        ArrayList<String> allWords = new ArrayList<>();
+        for (int r = 0; r < gameBoard.length; r++){
+            for (int c = 0; c < gameBoard[r].length; c++){
+                recursiveBoardSearch(r,c,0,"",allWords);
+            }
+        }
+        return allWords;
+    }
+
+    private void recursiveBoardSearch(int r, int c, long visited, String currentWord, ArrayList<String> allWords){
+        currentWord += gameBoard[r][c];
+        visited += (long) Math.pow(2, r * gameBoard.length + c);
+        if (!wordDictionary.isPrefix(currentWord)){
+            return;
+        }
+        if (wordDictionary.contains(currentWord) && !foundWords.contains(currentWord) && currentWord.length() > 3){
+            foundWords.add(currentWord);
+            allWords.add(currentWord);
+            playerScores[currentPlayer] += (currentWord.length() - 3);
+        }
+        for (int i = Math.max(0, r - 1); i <= Math.min(gameBoard.length - 1, r + 1); i++) {
+            for (int j = Math.max(0, c - 1); j <= Math.min(gameBoard[r].length - 1, c + 1); j++) {
+                if ((visited & ((long) Math.pow(2, i * gameBoard.length + j))) == 0) {
+                    recursiveBoardSearch(i,j,visited,currentWord,allWords);
+                }
+            }
+        }
+
     }
 
     @Override
     public void setSearchTactic(SearchTactic tactic) {
-
+        searchTactic = tactic;
     }
 
     @Override
     public int[] getScores() {
-        return new int[0];
+        return playerScores;
     }
 
     private void loadCube(String cubesFile){

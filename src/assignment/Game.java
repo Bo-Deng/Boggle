@@ -18,8 +18,8 @@ public class Game implements BoggleGame {
     private int currentPlayer;
     private SearchTactic searchTactic;
 
-    //Default Constructor always loads from words.txt and cubes.txt and a 4 x 4 board. (This basically is the default
-    //version of Boggle with no frills added.
+    // Default Constructor always loads from words.txt and cubes.txt and a 4 x 4 board. (This basically is the default
+    // version of Boggle with no frills added.)
     public Game() {
         cubes = new ArrayList<>();
         foundWords = new HashSet<>();
@@ -33,7 +33,7 @@ public class Game implements BoggleGame {
         }
     }
 
-    //Allows different files to be loaded, such as different board sizes and different dictionary/dice files
+    // Allows different files to be loaded, such as different board sizes and different dictionary/dice files
     public Game(int size, String cubeFile, String dictionaryFile) {
         cubes = new ArrayList<>();
         foundWords = new HashSet<>();
@@ -47,6 +47,7 @@ public class Game implements BoggleGame {
         }
     }
 
+    // Instantiates the objects needed to create a new Boggle game
     @Override
     public void newGame(int size, int numPlayers, String cubeFile, BoggleDictionary dict) throws IOException {
         if (size == 0){
@@ -65,20 +66,23 @@ public class Game implements BoggleGame {
         generateDiceStates();
     }
 
+    // Returns a 2D array of the characters on the boggle board
     @Override
     public char[][] getBoard() {
         return gameBoard;
     }
 
+    // Sets the current player (by default, human is 0 and computer is 1)
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
+    // Checks the board to see if a word is valid and adds the associated score to a player
     @Override
     public int addWord(String word, int player) {
         word = word.toUpperCase();
+        // Basic checks for validity
         if (word.length() < 4 || word.length() > 16 || !word.matches("[A-Z]+") || !wordDictionary.contains(word) || foundWords.contains(word)) {
-            System.out.println("boom");
             return 0;
         }
 
@@ -86,7 +90,6 @@ public class Game implements BoggleGame {
             boolean isValid = false;
             for (int c = 0; c < gameBoard[r].length; c++) {
                 if (gameBoard[r][c] == word.charAt(0)) {
-                    System.out.println(r + " " + c);
                     isValid = recursePossibilities(word, r, c);
                     if (isValid == true){
                         lastWord = word;
@@ -109,6 +112,7 @@ public class Game implements BoggleGame {
         return 0;
     }
 
+    // Returns the a list of the tile locations of the last added word
     @Override
     public List<Point> getLastAddedWord() {
         ArrayList<Point> points = new ArrayList<>();
@@ -122,6 +126,7 @@ public class Game implements BoggleGame {
         return points;
     }
 
+    // Sets the game board to a custom arrangement
     @Override
     public void setGame(char[][] board) {
         gameBoard = board;
@@ -130,6 +135,7 @@ public class Game implements BoggleGame {
         currentPlayer = 0;
     }
 
+    // Returns an ArrayList of all the valid words on the board using one of two search tactics
     @Override
     public Collection<String> getAllWords() {
         if (searchTactic == SearchTactic.SEARCH_DICT) {
@@ -138,6 +144,7 @@ public class Game implements BoggleGame {
         return boardSearch();
     }
 
+    // Iterates through the dictionary to return an ArrayList of all valid words
     private Collection<String> dictionarySearch() {
         ArrayList<String> allWords = new ArrayList<>();
         Iterator it = wordDictionary.iterator();
@@ -151,6 +158,7 @@ public class Game implements BoggleGame {
         return allWords;
     }
 
+    // Uses depth first search on the board to return an ArrayList of all valid words
     private Collection<String> boardSearch() {
         ArrayList<String> allWords = new ArrayList<>();
         for (int r = 0; r < gameBoard.length; r++){
@@ -161,17 +169,22 @@ public class Game implements BoggleGame {
         return allWords;
     }
 
+    // Depth first search implementation to find valid words on the board
     private void recursiveBoardSearch(int r, int c, boolean[][] visited, String currentWord, ArrayList<String> allWords){
         currentWord += gameBoard[r][c];
         visited[r][c] = true;
         if (!wordDictionary.isPrefix(currentWord)){
             return;
         }
+
+        // if the word is valid, add to the player's score (usually the computer)
         if (wordDictionary.contains(currentWord) && !foundWords.contains(currentWord) && currentWord.length() > 3){
             foundWords.add(currentWord);
             allWords.add(currentWord);
             playerScores[currentPlayer] += (currentWord.length() - 3);
         }
+
+        // recurse through all currently valid paths
         for (int i = Math.max(0, r - 1); i <= Math.min(gameBoard.length - 1, r + 1); i++) {
             for (int j = Math.max(0, c - 1); j <= Math.min(gameBoard[r].length - 1, c + 1); j++) {
                 if (!visited[i][j]) {
@@ -192,6 +205,7 @@ public class Game implements BoggleGame {
         return playerScores;
     }
 
+    // Loads in a file containing the boggle cubes
     private void loadCube(String cubesFile){
         try {
             Scanner cubeReader = new Scanner(new File(cubesFile));
@@ -209,6 +223,7 @@ public class Game implements BoggleGame {
 
     }
 
+    // Generates dice states randomly using the given cubes
     private void generateDiceStates(){
         Collections.shuffle(cubes);
         for (int i = 0; i < gameBoard.length; i++){
@@ -222,10 +237,12 @@ public class Game implements BoggleGame {
         }
     }
 
+    // recursively checks to see if a word is on the board (helper)
     private boolean recursePossibilities(String word, int r, int c) {
         return recursePossibilities(word, r, c, new boolean[gameBoard.length][gameBoard[0].length]);
     }
 
+    // recursively checks to see if a word is on the board
     private boolean recursePossibilities(String word, int r, int c, boolean[][] visited) {
         word = word.substring(1);
 
@@ -238,7 +255,6 @@ public class Game implements BoggleGame {
         for (int i = Math.max(0, r - 1); i <= Math.min(gameBoard.length - 1, r + 1); i++) {
             for (int j = Math.max(0, c - 1); j <= Math.min(gameBoard[r].length - 1, c + 1); j++) {
                 if (gameBoard[i][j] == word.charAt(0) && (!visited[i][j])) {
-                    System.out.println(i + " " + j);
                     if (recursePossibilities(word, i, j, deepCopyVisitedArray(visited))) {
                         return true;
                     }
@@ -264,6 +280,7 @@ public class Game implements BoggleGame {
 
     public int[] getPlayerScores() { return playerScores; }
 
+    // constructs a deep copy of the visited array for each search path
     public boolean[][] deepCopyVisitedArray(boolean[][] visited){
         boolean[][] copy = new boolean[visited.length][visited[0].length];
         for (int i = 0; i < visited.length; i++){

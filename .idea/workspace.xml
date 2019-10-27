@@ -2,15 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b79d356e-1fae-463d-b081-715165a7d59c" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/assignment/BoggleCellRenderer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assignment/BoggleExperimentalGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGUI$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGUI$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGUI$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGUI$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGUI.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/assignment/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/BoggleGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cubes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cubes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleGUI.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assignment/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/Game.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,7 +60,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.BoggleGUI (1)">
+  <component name="RunManager" selected="Application.BoggleGUI">
     <configuration default="true" type="Applet">
       <option name="HEIGHT" value="0" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
@@ -66,7 +69,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoggleGUI (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="BoggleGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BoggleGUI" />
+      <module name="prog5" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BoggleGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="assignment.BoggleGUI" />
       <module name="prog5" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -81,9 +92,15 @@
       </method>
     </configuration>
     <configuration name="BoggleGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="BoggleGUI" />
+      <option name="MAIN_CLASS_NAME" value="assignment.BoggleGUI" />
       <module name="prog5" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="assignment.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -153,9 +170,11 @@
       <item itemvalue="Application.BoggleGUI" />
       <item itemvalue="Application.BoggleGUI (1)" />
       <item itemvalue="Application.TestMain" />
+      <item itemvalue="Application.BoggleGUI" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BoggleGUI" />
         <item itemvalue="Application.BoggleGUI (1)" />
         <item itemvalue="Application.TestMain" />
         <item itemvalue="Application.BoggleGUI" />
@@ -179,6 +198,9 @@
       <workItem from="1571810724020" duration="4904000" />
       <workItem from="1571853761560" duration="2260000" />
       <workItem from="1571868269179" duration="2897000" />
+      <workItem from="1572143381239" duration="182000" />
+      <workItem from="1572149832706" duration="617000" />
+      <workItem from="1572194506498" duration="3879000" />
     </task>
     <servers />
   </component>

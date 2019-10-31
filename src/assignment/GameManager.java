@@ -7,11 +7,11 @@ import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
-public class Game implements BoggleGame {
+public class GameManager implements BoggleGame {
     private BoggleDictionary wordDictionary;
     private ArrayList<String> cubes;
     private char[][] gameBoard;
-    private boolean[][] lastTilesSelected;
+    private int[][] lastTilesSelected;
     public HashSet<String> foundWords;
     private String lastWord;
     private int[] playerScores;
@@ -20,38 +20,17 @@ public class Game implements BoggleGame {
 
     // Default Constructor always loads from words.txt and cubes.txt and a 4 x 4 board. (This basically is the default
     // version of Boggle with no frills added.)
-    public Game() {
+    public GameManager() {
         cubes = new ArrayList<>();
         foundWords = new HashSet<>();
-        try {
-            Dictionary load = new Dictionary();
-            load.loadDictionary("words.txt");
-            newGame(4, 2, "cubes.txt", load);
-        } catch (IOException ex) {
-            System.err.println("The specified dictionary file cannot be accessed.");
-            System.exit(1);
-        }
     }
 
-    // Allows different files to be loaded, such as different board sizes and different dictionary/dice files
-    public Game(int size, String cubeFile, String dictionaryFile) {
-        cubes = new ArrayList<>();
-        foundWords = new HashSet<>();
-        try {
-            Dictionary load = new Dictionary();
-            load.loadDictionary(dictionaryFile);
-            newGame(size, 2, cubeFile, load);
-        } catch (IOException ex) {
-            System.err.println("The specified dictionary file cannot be accessed.");
-            System.exit(1);
-        }
-    }
 
     // Instantiates the objects needed to create a new Boggle game
     @Override
     public void newGame(int size, int numPlayers, String cubeFile, BoggleDictionary dict) throws IOException {
-        if (size == 0){
-            System.err.println("Cannot have size 0 board");
+        if (size <= 0){
+            System.err.println("Cannot have board of that size");
             System.exit(0);
         }
         lastWord = "";
@@ -118,7 +97,7 @@ public class Game implements BoggleGame {
         ArrayList<Point> points = new ArrayList<>();
         for (int i = 0; i < lastTilesSelected.length; i++){
             for (int j = 0; j < lastTilesSelected[i].length; j++){
-                if (lastTilesSelected[i][j]){
+                if (lastTilesSelected[i][j] != 0){
                     points.add(new Point(i, j));
                 }
             }
@@ -130,6 +109,11 @@ public class Game implements BoggleGame {
     @Override
     public void setGame(char[][] board) {
         gameBoard = board;
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board.length; j++){
+                board[i][j] = Character.toUpperCase(board[i][j]);
+            }
+        }
         foundWords = new HashSet<>();
         playerScores = new int[playerScores.length];
         currentPlayer = 0;
@@ -163,16 +147,16 @@ public class Game implements BoggleGame {
         ArrayList<String> allWords = new ArrayList<>();
         for (int r = 0; r < gameBoard.length; r++){
             for (int c = 0; c < gameBoard[r].length; c++){
-                recursiveBoardSearch(r,c,new boolean[gameBoard.length][gameBoard[0].length],"",allWords);
+                recursiveBoardSearch(r,c,new int[gameBoard.length][gameBoard[0].length],"",allWords, 1);
             }
         }
         return allWords;
     }
 
     // Depth first search implementation to find valid words on the board
-    private void recursiveBoardSearch(int r, int c, boolean[][] visited, String currentWord, ArrayList<String> allWords){
+    private void recursiveBoardSearch(int r, int c, int[][] visited, String currentWord, ArrayList<String> allWords, int letterIndex){
         currentWord += gameBoard[r][c];
-        visited[r][c] = true;
+        visited[r][c] = letterIndex;
         if (!wordDictionary.isPrefix(currentWord)){
             return;
         }
@@ -187,8 +171,8 @@ public class Game implements BoggleGame {
         // recurse through all currently valid paths
         for (int i = Math.max(0, r - 1); i <= Math.min(gameBoard.length - 1, r + 1); i++) {
             for (int j = Math.max(0, c - 1); j <= Math.min(gameBoard[r].length - 1, c + 1); j++) {
-                if (!visited[i][j]) {
-                    recursiveBoardSearch(i,j,deepCopyVisitedArray(visited),currentWord,allWords);
+                if (visited[i][j] == 0) {
+                    recursiveBoardSearch(i,j,deepCopyVisitedArray(visited),currentWord,allWords, letterIndex + 1);
                 }
             }
         }
@@ -239,23 +223,23 @@ public class Game implements BoggleGame {
 
     // recursively checks to see if a word is on the board (helper)
     private boolean recursePossibilities(String word, int r, int c) {
-        return recursePossibilities(word, r, c, new boolean[gameBoard.length][gameBoard[0].length]);
+        return recursePossibilities(word, r, c, new int[gameBoard.length][gameBoard[0].length], 1);
     }
 
     // recursively checks to see if a word is on the board
-    private boolean recursePossibilities(String word, int r, int c, boolean[][] visited) {
+    private boolean recursePossibilities(String word, int r, int c, int[][] visited, int letterIndex) {
         word = word.substring(1);
 
         if (word.length() <= 0){
-            visited[r][c] = true;
+            visited[r][c] = letterIndex;
             lastTilesSelected = visited;
             return true;
         }
-        visited[r][c] = true;
+        visited[r][c] = letterIndex;
         for (int i = Math.max(0, r - 1); i <= Math.min(gameBoard.length - 1, r + 1); i++) {
             for (int j = Math.max(0, c - 1); j <= Math.min(gameBoard[r].length - 1, c + 1); j++) {
-                if (gameBoard[i][j] == word.charAt(0) && (!visited[i][j])) {
-                    if (recursePossibilities(word, i, j, deepCopyVisitedArray(visited))) {
+                if (gameBoard[i][j] == word.charAt(0) && (visited[i][j] == 0)) {
+                    if (recursePossibilities(word, i, j, deepCopyVisitedArray(visited), letterIndex + 1)) {
                         return true;
                     }
                 }
@@ -268,7 +252,7 @@ public class Game implements BoggleGame {
         return lastWord;
     }
 
-    public boolean[][] getLastTilesSelected() {
+    public int[][] getLastTilesSelected() {
         return lastTilesSelected;
     }
 
@@ -281,13 +265,17 @@ public class Game implements BoggleGame {
     public int[] getPlayerScores() { return playerScores; }
 
     // constructs a deep copy of the visited array for each search path
-    public boolean[][] deepCopyVisitedArray(boolean[][] visited){
-        boolean[][] copy = new boolean[visited.length][visited[0].length];
+    private int[][] deepCopyVisitedArray(int[][] visited){
+        int[][] copy = new int[visited.length][visited[0].length];
         for (int i = 0; i < visited.length; i++){
             for (int j = 0; j < visited[i].length; j++){
                 copy[i][j] = visited[i][j];
             }
         }
         return copy;
+    }
+
+    private void updateLastTilesSelected(){
+
     }
 }

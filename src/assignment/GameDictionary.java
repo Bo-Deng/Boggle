@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class Dictionary implements BoggleDictionary {
+public class GameDictionary implements BoggleDictionary {
 
     public LetterNode root;
 
-    public Dictionary() {
+    public GameDictionary() {
         root = new LetterNode();
     }
 

@@ -274,8 +274,4 @@ public class GameManager implements BoggleGame {
         }
         return copy;
     }
-
-    private void updateLastTilesSelected(){
-
-    }
 }

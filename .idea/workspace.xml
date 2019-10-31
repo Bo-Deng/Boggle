@@ -2,31 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b79d356e-1fae-463d-b081-715165a7d59c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleCellRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleCellRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleDictionary.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleDictionary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleDictionaryIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleDictionaryIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGame$SearchTactic.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGame$SearchTactic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/Dictionary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/LetterNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/LetterNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/TestMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/TestMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cubes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cubes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prog5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/prog5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/BoggleCellRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleDictionaryIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/BoggleDictionaryIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/Boggle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/GameDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/LetterNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/LetterNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assignment/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/GameManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +33,7 @@
     <property name="UI_DESIGNER_EDITOR_MODE.UIDesignerToolWindowManager.SHOW" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/boggle-t8.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -291,6 +270,7 @@
       <workItem from="1572410153860" duration="2344000" />
       <workItem from="1572413074962" duration="107000" />
       <workItem from="1572479024998" duration="1217000" />
+      <workItem from="1572489787581" duration="419000" />
     </task>
     <servers />
   </component>

@@ -132,7 +132,7 @@ public class GameManager implements BoggleGame {
     private Collection<String> dictionarySearch() {
         ArrayList<String> allWords = new ArrayList<>();
         Iterator it = wordDictionary.iterator();
-        while (it.hasNext()) {
+            while (it.hasNext()) {
             String next = (String) it.next();
             int score = addWord(next, currentPlayer);
             if (score != 0) {
@@ -265,7 +265,7 @@ public class GameManager implements BoggleGame {
     public int[] getPlayerScores() { return playerScores; }
 
     // constructs a deep copy of the visited array for each search path
-    private int[][] deepCopyVisitedArray(int[][] visited){
+    public int[][] deepCopyVisitedArray(int[][] visited){
         int[][] copy = new int[visited.length][visited[0].length];
         for (int i = 0; i < visited.length; i++){
             for (int j = 0; j < visited[i].length; j++){

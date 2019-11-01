@@ -213,7 +213,7 @@ public class GameManager implements BoggleGame {
         for (int i = 0; i < gameBoard.length; i++){
             for (int j = 0; j < gameBoard[0].length; j++){
                 int diceFace = (int) (Math.random() * 6);
-                gameBoard[i][j] = cubes.get((4 * i + j)%16).charAt(diceFace);
+                gameBoard[i][j] = cubes.get((gameBoard.length * i + j)%(cubes.size())).charAt(diceFace);
                 if (4*i + j == cubes.size() - 1){
                     Collections.shuffle(cubes);
                 }

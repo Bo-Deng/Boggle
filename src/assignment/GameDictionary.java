@@ -15,7 +15,6 @@ public class GameDictionary implements BoggleDictionary {
 
     @Override
     public void loadDictionary(String filename) throws IOException {
-        root = new LetterNode();
         Scanner sc = new Scanner(new File(filename));
         while (sc.hasNext()) {
             root.addWord(sc.next().toUpperCase());

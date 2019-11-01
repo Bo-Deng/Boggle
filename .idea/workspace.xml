@@ -2,31 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b79d356e-1fae-463d-b081-715165a7d59c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/iteratortest.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/specialcharactercubes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleCellRenderer.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleCellRenderer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleDictionary.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleDictionary.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleDictionaryIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleDictionaryIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleExperimentalGUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGame$SearchTactic.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGame$SearchTactic.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleGame.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/Dictionary.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/LetterNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/LetterNode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/assignment/TestMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/TestMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cubes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cubes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prog5.iml" beforeDir="false" afterPath="$PROJECT_DIR$/prog5.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleCellRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/BoggleCellRenderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleDictionaryIterator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/BoggleDictionaryIterator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/Boggle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/Dictionary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/GameDictionary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/assignment/LetterNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/LetterNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/Boggle$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/Boggle$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/Boggle$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/Boggle$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/Boggle$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/Boggle$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/Boggle$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/Boggle$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/Boggle$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/Boggle$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/Boggle$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/Boggle$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/Boggle.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/Boggle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/BoggleWhiteBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/BoggleWhiteBox.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/assignment/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/assignment/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assignment/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/GameManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,7 +66,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Boggle">
+  <component name="RunManager" selected="JUnit.BoggleWhiteBox">
     <configuration default="true" type="Applet">
       <option name="HEIGHT" value="0" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
@@ -255,8 +244,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Boggle" />
         <item itemvalue="JUnit.BoggleWhiteBox" />
+        <item itemvalue="Application.Boggle" />
         <item itemvalue="JUnit.BoggleWhiteBox.testDictionaryOrder" />
         <item itemvalue="Application.BoggleGUI" />
         <item itemvalue="Application.TestMain" />
@@ -290,7 +279,7 @@
       <workItem from="1572397435402" duration="6447000" />
       <workItem from="1572410153860" duration="2344000" />
       <workItem from="1572413074962" duration="107000" />
-      <workItem from="1572479024998" duration="1217000" />
+      <workItem from="1572479024998" duration="9741000" />
     </task>
     <servers />
   </component>

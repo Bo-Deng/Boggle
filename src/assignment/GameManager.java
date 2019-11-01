@@ -30,8 +30,8 @@ public class GameManager implements BoggleGame {
     @Override
     public void newGame(int size, int numPlayers, String cubeFile, BoggleDictionary dict) throws IOException {
         if (size <= 0){
-            System.err.println("Cannot have board of that size");
-            System.exit(0);
+            System.err.println("Cannot have board of non-positive size");
+            throw new IllegalArgumentException();
         }
         lastWord = "";
         wordDictionary = dict;
@@ -61,7 +61,7 @@ public class GameManager implements BoggleGame {
     public int addWord(String word, int player) {
         word = word.toUpperCase();
         // Basic checks for validity
-        if (word.length() < 4 || word.length() > 16 || !word.matches("[A-Z]+") || !wordDictionary.contains(word) || foundWords.contains(word)) {
+        if (word.length() < 4 || word.length() > 16|| !word.matches("[A-Z]+") || !wordDictionary.contains(word) || foundWords.contains(word)) {
             return 0;
         }
 
@@ -74,7 +74,7 @@ public class GameManager implements BoggleGame {
                         lastWord = word;
                         foundWords.add(lastWord);
                         int wordScore = word.length() - 3;
-                        playerScores[currentPlayer] += wordScore;
+                        playerScores[player] += wordScore;
                         return wordScore;
                     }
                 }
@@ -84,7 +84,7 @@ public class GameManager implements BoggleGame {
                 foundWords.add(lastWord);
 
                 int wordScore = word.length() - 3;
-                playerScores[currentPlayer] += wordScore;
+                playerScores[player] += wordScore;
                 return wordScore;
             }
         }
@@ -190,7 +190,7 @@ public class GameManager implements BoggleGame {
     }
 
     // Loads in a file containing the boggle cubes
-    private void loadCube(String cubesFile){
+    private void loadCube(String cubesFile) throws IOException {
         try {
             Scanner cubeReader = new Scanner(new File(cubesFile));
             while (cubeReader.hasNextLine()){
@@ -198,11 +198,11 @@ public class GameManager implements BoggleGame {
             }
         } catch (FileNotFoundException ex) {
             System.err.println("Cubes File not Found");
-            System.exit(0);
+            throw new IOException();
         }
         if (cubes.size() == 0){
             System.err.println("No dice in cubes file");
-            System.exit(0);
+            throw new IllegalArgumentException();
         }
 
     }
@@ -275,7 +275,11 @@ public class GameManager implements BoggleGame {
         return copy;
     }
 
-    private void updateLastTilesSelected(){
+    public void clearFoundTiles(){
+        foundWords.clear();
+    }
 
+    public void clearScores(){
+        playerScores = new int[playerScores.length];
     }
 }

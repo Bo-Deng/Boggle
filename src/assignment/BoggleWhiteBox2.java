@@ -3,6 +3,7 @@ package assignment;
 import assignment.Boggle;
 import assignment.GameDictionary;
 import assignment.GameManager;
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestFactory;
 
@@ -40,6 +41,32 @@ public class BoggleWhiteBox2 {
         }
     }
 
-    
+    @Test
+    public void testSetGame() throws IOException {
+        GameManager gm = new GameManager();
+        gm.newGame(4, 2, "cubes.txt", new GameDictionary());
+        int size = 4;
+        char[][] newBoard = new char[size][size];
+
+        for (int r = 0; r < size; r++) {
+            for (int c = 0; c < size; c++) {
+                newBoard[r][c] = (char)(r * size + c);
+            }
+        }
+        gm.setGame(newBoard);
+
+        assertTrue(Arrays.deepEquals(newBoard, gm.getBoard()));
+
+        newBoard = new char[4][5];
+
+        assertFalse(Arrays.deepEquals(newBoard, gm.getBoard()));
+
+        gm.setGame(newBoard);
+
+        assertFalse(Arrays.deepEquals(newBoard, gm.getBoard()));
+
+    }
+
+
 
 }

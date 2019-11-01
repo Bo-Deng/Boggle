@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b79d356e-1fae-463d-b081-715165a7d59c" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/BoggleWhiteBox2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/assignment/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/assignment/GameManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -56,7 +57,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.BoggleWhiteBox2.testDeepCopy">
+  <component name="RunManager" selected="JUnit.BoggleWhiteBox2.testSetGame">
     <configuration default="true" type="Applet">
       <option name="HEIGHT" value="0" />
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
@@ -75,14 +76,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BoggleGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="BoggleGUI" />
-      <module name="prog5" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -184,6 +177,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BoggleWhiteBox2.testSetGame" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="prog5" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="assignment.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="assignment" />
+      <option name="MAIN_CLASS_NAME" value="assignment.BoggleWhiteBox2" />
+      <option name="METHOD_NAME" value="testSetGame" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="BoggleWhiteBox.testDictionaryOrder" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="prog5" />
       <extension name="coverage">
@@ -230,19 +241,19 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.BoggleGUI" />
       <item itemvalue="Application.Boggle" />
       <item itemvalue="JUnit.BoggleWhiteBox" />
       <item itemvalue="JUnit.BoggleWhiteBox.testDictionaryOrder" />
       <item itemvalue="JUnit.BoggleWhiteBox2.testDeepCopy" />
+      <item itemvalue="JUnit.BoggleWhiteBox2.testSetGame" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.BoggleWhiteBox2.testSetGame" />
         <item itemvalue="JUnit.BoggleWhiteBox2.testDeepCopy" />
         <item itemvalue="Application.Boggle" />
         <item itemvalue="JUnit.BoggleWhiteBox" />
         <item itemvalue="JUnit.BoggleWhiteBox.testDictionaryOrder" />
-        <item itemvalue="Application.BoggleGUI" />
       </list>
     </recent_temporary>
   </component>

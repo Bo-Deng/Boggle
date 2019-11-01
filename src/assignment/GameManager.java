@@ -108,6 +108,12 @@ public class GameManager implements BoggleGame {
     // Sets the game board to a custom arrangement
     @Override
     public void setGame(char[][] board) {
+
+        if (board.length > 0 && board.length != board[0].length) {
+            System.err.println("Board must be square");
+            return;
+        }
+
         gameBoard = board;
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board.length; j++){
@@ -132,7 +138,7 @@ public class GameManager implements BoggleGame {
     private Collection<String> dictionarySearch() {
         ArrayList<String> allWords = new ArrayList<>();
         Iterator it = wordDictionary.iterator();
-        while (it.hasNext()) {
+            while (it.hasNext()) {
             String next = (String) it.next();
             int score = addWord(next, currentPlayer);
             if (score != 0) {
@@ -265,7 +271,7 @@ public class GameManager implements BoggleGame {
     public int[] getPlayerScores() { return playerScores; }
 
     // constructs a deep copy of the visited array for each search path
-    private int[][] deepCopyVisitedArray(int[][] visited){
+    public int[][] deepCopyVisitedArray(int[][] visited){
         int[][] copy = new int[visited.length][visited[0].length];
         for (int i = 0; i < visited.length; i++){
             for (int j = 0; j < visited[i].length; j++){

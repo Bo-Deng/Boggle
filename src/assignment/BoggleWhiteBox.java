@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 public class BoggleWhiteBox {
 
+    // Test that the dictionary correctly iterates in lexicographical order
     @Test
     public void testDictionaryOrder() throws Exception {
         GameDictionary testDictionary = new GameDictionary();
@@ -39,6 +40,7 @@ public class BoggleWhiteBox {
 
     }
 
+
     @Test
     public void boardSizing() throws Exception{
         GameManager gameBoard = new GameManager();
@@ -54,7 +56,7 @@ public class BoggleWhiteBox {
     }
 
 
-
+    // Test that cubes of special and non-English characters can be loaded in correctly
     @Test
     public void testSpecialInput() throws IOException{
         GameManager gameBoard = new GameManager();
@@ -70,7 +72,8 @@ public class BoggleWhiteBox {
         }
     }
 
-
+    // Test that the addWord method can find long words on the board and not find
+    // words that aren't on the board
     @Test
     public void testBoardSearching() throws IOException{
         GameManager gameBoard = new GameManager();
@@ -102,6 +105,7 @@ public class BoggleWhiteBox {
         assertEquals(gameBoard.getScores()[0], 13);
     }
 
+
     @Test
     public void testNewGameInput() throws IOException {
         GameManager gameBoard = new GameManager();
@@ -120,6 +124,7 @@ public class BoggleWhiteBox {
         });
     }
 
+    // Test that the board and dictionary search produce identical results
     @Test
     public void testBoardAndDictionarySearch() throws IOException{
         GameManager gameBoard = new GameManager();
@@ -208,6 +213,7 @@ public class BoggleWhiteBox {
         assertTrue(it.hasNext());
     }
 
+    // Test that the scoring of a word is equal to its length - 3
     @Test
     public void testScoring() throws IOException{
         GameDictionary gd = new GameDictionary();

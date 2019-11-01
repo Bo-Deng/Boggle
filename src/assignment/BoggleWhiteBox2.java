@@ -15,6 +15,8 @@ import java.util.Iterator;
 
 public class BoggleWhiteBox2 {
 
+    // Tests that the GameManager's deepCopy method actually produces a
+    // deep copy (modifying the original doesn't modify the copy and vice versa)
     @Test
     public void testDeepCopy() {
         GameManager gm = new GameManager();
@@ -41,6 +43,7 @@ public class BoggleWhiteBox2 {
         }
     }
 
+    // Tests that the setGame method correctly sets the game board and disallows non-square boards
     @Test
     public void testSetGame() throws IOException {
         GameManager gm = new GameManager();

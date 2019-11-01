@@ -109,6 +109,11 @@ public class GameManager implements BoggleGame {
     @Override
     public void setGame(char[][] board) {
 
+        if (board.length == 0) {
+            System.err.print("Board must have a positive size");
+            return;
+        }
+
         if (board.length > 0 && board.length != board[0].length) {
             System.err.println("Board must be square");
             return;

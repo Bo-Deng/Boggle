@@ -55,10 +55,6 @@ public class BoggleWhiteBox {
 
 
 
-
-
-
-
     @Test
     public void testSpecialInput() throws IOException{
         GameManager gameBoard = new GameManager();
@@ -141,6 +137,89 @@ public class BoggleWhiteBox {
             gameBoard.getAllWords();
             int score2 = gameBoard.getScores()[0];
             assertTrue(score1 == score2);
+        }
+    }
+
+    @Test
+    public void testIsPrefix() throws IOException {
+        GameDictionary dc = new GameDictionary();
+        dc.loadDictionary("words.txt");
+        //Case 1: Empty String is a prefix always
+        assertTrue(dc.isPrefix(""));
+
+        //Case 2: Words in the dictionary
+        //Three letter words, despite being invalid for scoring should still be treated as usual in the dictioanry
+        assertTrue(dc.isPrefix("CAT"));
+        assertTrue(dc.isPrefix("cat"));
+        //Case 3: Prefixes in the Dictionary
+        assertTrue(dc.isPrefix("transf"));
+        assertTrue(dc.isPrefix("hippop"));
+        assertTrue(dc.isPrefix("lio"));
+        //Case 4: Non existant words/prefixes
+        assertFalse(dc.isPrefix("qwerty"));
+        assertFalse(dc.isPrefix("hiperp"));
+        assertFalse(dc.isPrefix("bogglegame"));
+    }
+
+    @Test
+    public void testContains() throws IOException{
+        GameDictionary dc = new GameDictionary();
+        dc.loadDictionary("words.txt");
+
+        //Case 1: Empty String is not in the dictionary
+        assertFalse(dc.contains(""));
+        //Case 2: Words in the dictionary
+        assertTrue(dc.contains("DOG"));
+        assertTrue(dc.contains("dog"));
+        //Case 3: Non existant words
+        //Note the dictionary used does not contain single letter words
+        assertFalse(dc.contains("i"));
+        assertFalse(dc.contains("bonjour"));
+        assertFalse(dc.contains("aggressivenesset"));
+    }
+
+    @Test
+    public void testAddWord(){
+        LetterNode testNode = new LetterNode();
+        //Word is not present until after it is added
+        //Case 1: Nonexistant word before and after add
+        assertFalse(testNode.contains("potato"));
+        testNode.addWord("potato");
+        assertTrue(testNode.contains("potato"));
+        //Case 2: Word similar to already existing word
+        assertFalse(testNode.contains("potata"));
+        testNode.addWord("potata");
+        assertTrue(testNode.contains("potata"));
+        //Case 3: Whitespace
+        assertFalse(testNode.contains(""));
+        testNode.addWord("");
+        assertTrue(testNode.contains(""));
+
+    }
+
+    @Test
+    public void testIteratorHasNext() throws IOException {
+        GameDictionary gd = new GameDictionary();
+        Iterator it = gd.iterator();
+        //No next element exists
+        assertFalse(it.hasNext());
+        gd.loadDictionary("words.txt");
+        it = gd.iterator();
+        assertTrue(it.hasNext());
+    }
+
+    @Test
+    public void testScoring() throws IOException{
+        GameDictionary gd = new GameDictionary();
+        gd.loadDictionary("controlleddictionary");
+        GameManager gm = new GameManager();
+        gm.newGame(4, 2, "controlleddice", gd);
+        String word = "A";
+        for (int i = 1; i <= 16; i++){
+            gm.clearScores();
+            gm.addWord(word, 0);
+            assertEquals(gm.getScores()[0], Math.max(0, i-3));
+            word += "A";
         }
     }
 

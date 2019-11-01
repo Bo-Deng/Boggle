@@ -15,6 +15,7 @@ public class GameDictionary implements BoggleDictionary {
 
     @Override
     public void loadDictionary(String filename) throws IOException {
+        root = new LetterNode();
         Scanner sc = new Scanner(new File(filename));
         while (sc.hasNext()) {
             root.addWord(sc.next().toUpperCase());
@@ -23,12 +24,12 @@ public class GameDictionary implements BoggleDictionary {
 
     @Override
     public boolean isPrefix(String prefix) {
-        return root.isPrefix(prefix);
+        return root.isPrefix(prefix.toUpperCase());
     }
 
     @Override
     public boolean contains(String word) {
-        return root.contains(word);
+        return root.contains(word.toUpperCase());
     }
 
     @Override
